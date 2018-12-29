@@ -11,15 +11,35 @@ android {
         versionName gradle.versionName
     }
 
+    signingConfigs {
+        release {
+            File strFile = new File("../keystore/AsZxing.keystore")
+            storeFile file(strFile)
+            keyAlias 'journeyOS'
+            keyPassword 'AsZxing'
+            storePassword 'qazwsxedc'
+        }
+        debug {
+            File strFile = new File("../keystore/AsZxing.keystore")
+            storeFile file(strFile)
+            keyAlias 'journeyOS'
+            keyPassword 'AsZxing'
+            storePassword 'qazwsxedc'
+        }
+    }
 
     buildTypes {
         release {
             minifyEnabled false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -33,6 +53,20 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.outputs.all {
+                outputFileName = new File("./../../../../../app_release/", "Zxing.apk")
+            }
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {

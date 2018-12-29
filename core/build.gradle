@@ -70,8 +70,8 @@ artifacts {
 group = "com.journeyOS"
 version = "1.0.0"
 
-def siteUrl = 'https://github.com/journeyOS/LiteZxing.git'
-def gitUrl = 'git@github.com:journeyOS/LiteZxing.git'
+def siteUrl = 'https://github.com/journeyOS/AsZxing.git'
+def gitUrl = 'git@github.com:journeyOS/AsZxing.git'
 
 install {
     repositories.mavenInstaller {
